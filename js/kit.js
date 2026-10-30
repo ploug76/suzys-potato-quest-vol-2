@@ -145,7 +145,7 @@ K.initPad=function(o){if(!window.GamepadSupport)return;const sc=()=>K.scene||{};
  const fwd=(name)=>function(p){K.padUsed=true;const s=sc();if(s.padBtn&&s.padBtn(name,p)===true)return;if(!p)return;
   if(name==='a'&&!s.play){const b=K.lastBtns.find(z=>z.id===K.focusId&&!z.dis&&!z.hidden)||K.lastBtns.find(z=>z.primary&&!z.dis&&!z.hidden)||K.lastBtns.find(z=>!z.dis&&!z.hidden);if(b){K.focusId=b.id;fire(b)}}
   if(name==='b'&&!s.play){if(s.back)s.back()}
-  if(name==='start'){if(s.play&&s.pause)s.pause();else if(s.resume)s.resume()}
+  if(name==='start'){if(s.paused&&s.resume)s.resume();else if(s.play&&s.pause)s.pause()}
   if(name==='back')K.toggleMute()};
  const nav=(dx,dy)=>function(p){K.padUsed=true;const s=sc();if(s.padDir&&s.padDir(dx,dy,p)===true)return;if(!p||s.play)return;moveFocus(dx,dy)};
  GamepadSupport.init({keys:{a:fwd('a'),b:fwd('b'),x:fwd('x'),y:fwd('y'),lb:fwd('lb'),rb:fwd('rb'),lt:fwd('lt'),rt:fwd('rt'),start:fwd('start'),back:fwd('back'),up:nav(0,-1),down:nav(0,1),left:nav(-1,0),right:nav(1,0)},
